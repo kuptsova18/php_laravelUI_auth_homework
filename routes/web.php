@@ -1,11 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\UserInfoController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('/home');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/user-info', [UserInfoController::class, 'index'])
+    ->middleware('auth')
+    ->name('user.info');
